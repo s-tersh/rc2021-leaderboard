@@ -54,15 +54,27 @@ function App() {
     }
   }
 
+  function _onChangeGender(id) {
+    console.log(`Gender is ${id}`)
+  }
+
+  function _onCangeEvent(id) {
+    console.log(`Tab is ${id}`)
+  }
+
+  function _onClickAthlete(id) {
+    console.log(`Item is ${id}`)
+  }
+
   return (
     <Fragment>
       <div style={style.topSection}>
         <p style={style.header}>Roockie Challenge 2021</p>
-        <Dropdown options={optionsGender} textAlign='center' onChange={(id) => {console.log(`Gender is ${id}`)}}/>
+        <Dropdown options={optionsGender} textAlign='center' onChange={_onChangeGender}/>
       </div>
       <div style={style.bottomSection}>
-        <Tabs tabs={tabsEvent} selected={tabsEvent[0]} onChange={(id) => {console.log(`Tab is ${id}`)}}/>
-        <ListView item items={data} onClickItem={(id) => {console.log(`Item is ${id}`)}}/>
+        <Tabs tabs={tabsEvent} selected={tabsEvent[0]} onChange={_onCangeEvent}/>
+        <ListView item items={data} onClickItem={_onClickAthlete}/>
       </div>
     </Fragment>
   )
