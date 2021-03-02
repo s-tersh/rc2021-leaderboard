@@ -38,9 +38,16 @@ function App() {
 
   const [data, setData] = useState(list)
 
-  const style = {
+  const s = {
     topSection: {
       height: '30vh'
+    },
+    appBar: {
+      position: 'fixed',
+      left: '0',
+      right: '0',
+      backgroundColor: '#efefef',
+      paddingBottom: '10px'
     },
     header: {
       textAlign: 'center',
@@ -68,11 +75,13 @@ function App() {
 
   return (
     <Fragment>
-      <div style={style.topSection}>
-        <p style={style.header}>Roockie Challenge 2021</p>
-        <Dropdown options={optionsGender} textAlign='center' onChange={_onChangeGender}/>
+      <div style={s.topSection}>
+        <div style={s.appBar}>
+          <p style={s.header}>Roockie Challenge 2021</p>
+          <Dropdown options={optionsGender} textAlign='center' onChange={_onChangeGender}/>
+        </div>
       </div>
-      <div style={style.bottomSection}>
+      <div style={s.bottomSection}>
         <Tabs tabs={tabsEvent} selected={tabsEvent[0]} onChange={_onCangeEvent}/>
         <ListView item items={data} onClickItem={_onClickAthlete}/>
       </div>

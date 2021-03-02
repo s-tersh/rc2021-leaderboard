@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Icon from './Icon'
 
 const Dropdown = ({options = [], textAlign, onChange}) => {
 
@@ -9,10 +10,16 @@ const Dropdown = ({options = [], textAlign, onChange}) => {
         container: {
             textAlign: textAlign
         },
+        optionsHolder: {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center'
+        },
         optionsContainer: {
+            position: 'absolute',
             backgroundColor: 'white',
-            padding: '5px 0',
-            marginTop: '20px'
+            padding: '5px 50px',
+            margin: '10px auto 0 auto'
         },
         option: {
             margin: '10px 0'
@@ -24,7 +31,7 @@ const Dropdown = ({options = [], textAlign, onChange}) => {
     }
 
     function _onClickSelect() {
-        setFocus(true)
+        setFocus(!focus)
     }
 
     function _onClickOption(option) {
@@ -35,12 +42,14 @@ const Dropdown = ({options = [], textAlign, onChange}) => {
 
     return (
         <div style={s.container}>
-            <div onClick={_onClickSelect}>{active.title}</div>
+            <div onClick={_onClickSelect}>{active.title}<Icon name='caret-down' size={10}/></div>
             {focus &&
-                <div style={s.optionsContainer}>
-                    {options.map(option => {
-                        return <p key={option.id} style={active === option ? s.optionActive : s.option} onClick={() => {_onClickOption(option)}}>{option.title}</p>
-                    })}
+                <div style={s.optionsHolder}>
+                    <div style={s.optionsContainer}>
+                        {options.map(option => {
+                            return <p key={option.id} style={active === option ? s.optionActive : s.option} onClick={() => {_onClickOption(option)}}>{option.title}</p>
+                        })}
+                    </div>
                 </div>
             }
         </div>

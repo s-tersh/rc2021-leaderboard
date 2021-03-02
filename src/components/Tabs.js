@@ -13,7 +13,7 @@ const Tabs = ({tabs = [], selected, onChange}) => {
             paddingBottom: '10px'
         },
         tab: {
-            marginRight: '50px',
+            marginRight: '30px',
             paddingRight: '20px',
             fontSize: '1rem',
             color: '#a5a5a5'
@@ -21,7 +21,7 @@ const Tabs = ({tabs = [], selected, onChange}) => {
         tabActive: {
             display: 'flex',
             alignItems: 'center',
-            marginRight: '50px',
+            marginRight: '30px',
             paddingRight: '20px',
             fontWeight: '700',
             fontSize: '1rem'
