@@ -53,9 +53,10 @@ const ListItem = ({item = {}, onClick}) => {
             fontWeight: '700',
             margin: '0'
         },
-        subname: {
+        subnameBlock: {
             display: 'flex',
-            fontSize: '.75rem'
+            fontSize: '.65rem',
+            color: '#b1b1b1'
         },
         subnameCity: {
             margin: '0'
@@ -64,7 +65,7 @@ const ListItem = ({item = {}, onClick}) => {
             margin: '0'
         },
         points: {
-
+            fontWeight: '700'
         }
     }
 
@@ -78,7 +79,7 @@ const ListItem = ({item = {}, onClick}) => {
             <img style={s.avatar} alt='' src='https://w7.pngwing.com/pngs/72/42/png-transparent-vkontakte-social-networking-service-account-user-facebook-anonymous-mask-miscellaneous-blue-people.png'/>
             <div style={s.nameBlock}>
                 <p style={s.name}>{item.lastname} {item.name}</p>
-                <span style={s.subname}><p style={s.subnameCity}>{item.city}</p><p style={s.subnameClub}>, {item.club}</p></span>
+                <span style={s.subnameBlock}><p style={s.subnameCity}>{item.city}</p><p style={s.subnameClub}>, {item.club}</p></span>
             </div>
             <p style={s.points}>{item.points}</p>
         </div>

@@ -1,8 +1,9 @@
 import React, { Fragment, useState } from 'react'
 import ListView from './components/ListView.js'
 import './App.css'
-import Tabs from './components/Tabs.js'
 import Dropdown from './components/DropDown.js'
+import Grid from './components/Grid.js'
+import Tabs from './components/Tabs.js'
 
 function App() {
 
@@ -40,7 +41,7 @@ function App() {
 
   const s = {
     topSection: {
-      height: '30vh'
+      height: '67px'
     },
     appBar: {
       position: 'fixed',
@@ -57,7 +58,7 @@ function App() {
       color: 'grey'
     },
     bottomSection: {
-      height: '70vh',
+      height: '70vh - 67px',
     }
   }
 
@@ -82,6 +83,11 @@ function App() {
         </div>
       </div>
       <div style={s.bottomSection}>
+        <Grid style={s.lb} columnsCount={3} children={[
+          {id: 0},
+          {id: 1},
+          {id: 2}
+        ]}/>
         <Tabs tabs={tabsEvent} selected={tabsEvent[0]} onChange={_onCangeEvent}/>
         <ListView item items={data} onClickItem={_onClickAthlete}/>
       </div>

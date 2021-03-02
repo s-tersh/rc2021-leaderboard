@@ -19,7 +19,8 @@ const Dropdown = ({options = [], textAlign, onChange}) => {
             position: 'absolute',
             backgroundColor: 'white',
             padding: '5px 50px',
-            margin: '10px auto 0 auto'
+            margin: '10px auto 0 auto',
+            borderRadius: '7px'
         },
         option: {
             margin: '10px 0'
