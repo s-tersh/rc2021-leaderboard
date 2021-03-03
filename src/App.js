@@ -1,11 +1,23 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import ListView from './components/ListView.js'
 import './App.css'
 import Dropdown from './components/DropDown.js'
 import Grid from './components/Grid.js'
 import Tabs from './components/Tabs.js'
+import { GoogleSpreadsheet } from 'google-spreadsheet'
+import credentinals from './credentinals.js'
 
 function App() {
+
+  useEffect(async() => {
+    const doc = new GoogleSpreadsheet('1ot2xuvoXKJmY9J7HpiEYCp9qiCsbL13iVsywf6jcq9U')
+    await doc.useServiceAccountAuth({
+      client_email: credentinals.client_email,
+      private_key: credentinals.private_key,
+    })
+    await doc.loadInfo()
+    console.log(doc.sheetCount)
+  }, [])
 
   const list = [
     {id: 0, avatar: 'a', name: 'Igor', lastname: 'Natikin', city: 'A-city', club: 'A Club', gender: 'm', events: [{id: 0, title: '21.1', place: 1, points: 100}], points: 100, place: 1},
