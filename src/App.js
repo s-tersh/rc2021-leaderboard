@@ -9,14 +9,18 @@ import credentinals from './credentinals.js'
 
 function App() {
 
-  useEffect(async() => {
-    const doc = new GoogleSpreadsheet('1ot2xuvoXKJmY9J7HpiEYCp9qiCsbL13iVsywf6jcq9U')
+  async function initConnection() {
+    const doc = new GoogleSpreadsheet(credentinals.sheet_id)
     await doc.useServiceAccountAuth({
       client_email: credentinals.client_email,
       private_key: credentinals.private_key,
     })
     await doc.loadInfo()
-    console.log(doc.sheetCount)
+    console.log(doc)
+  }
+  
+  useEffect(() => {
+    initConnection()
   }, [])
 
   const list = [
