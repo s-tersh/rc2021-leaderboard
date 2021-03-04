@@ -45,10 +45,10 @@ const Grid = ({columnsCount, children = []}) => {
     )
 }
 
-const Column = () => {
-    return (
-        <div></div>
-    )
-}
+// const Column = () => {
+//     return (
+//         <div></div>
+//     )
+// }
 
 export default Grid

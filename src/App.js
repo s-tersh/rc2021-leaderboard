@@ -4,41 +4,29 @@ import './App.css'
 import Dropdown from './components/DropDown.js'
 import Grid from './components/Grid.js'
 import Tabs from './components/Tabs.js'
-import { GoogleSpreadsheet } from 'google-spreadsheet'
-import credentinals from './credentinals.js'
+import db from './db.js'
+import Blackout from './components/Blackout.js'
 
 function App() {
 
-  async function initConnection() {
-    const doc = new GoogleSpreadsheet(credentinals.sheet_id)
-    await doc.useServiceAccountAuth({
-      client_email: credentinals.client_email,
-      private_key: credentinals.private_key,
-    })
-    await doc.loadInfo()
-    console.log(doc)
-  }
-  
+  const [isLoading, setLoading] = useState(true)
+  const [data, setData] = useState([])
+
   useEffect(() => {
-    initConnection()
+    getMAthletesList()
   }, [])
+  
+  function getMAthletesList() {
+    db.getMAthletes()
+      .then(athlete => {
+        setData(athlete)
+        setLoading(false)
+      })
+  }
 
-  const list = [
-    {id: 0, avatar: 'a', name: 'Igor', lastname: 'Natikin', city: 'A-city', club: 'A Club', gender: 'm', events: [{id: 0, title: '21.1', place: 1, points: 100}], points: 100, place: 1},
-    {id: 1, avatar: 'b', name: 'Igor', lastname: 'Natikin', city: 'B-city', club: 'B Club', gender: 'm', events: [{id: 0, title: '21.1', place: 2, points: 95}], points: 95, place: 2},
-    {id: 2, avatar: 'c', name: 'Igor', lastname: 'Natikin', city: 'C-city', club: 'C Club', gender: 'm', events: [{id: 0, title: '21.1', place: 4, points: 85}], points: 85, place: 4},
-    {id: 3, avatar: 'd', name: 'Igor', lastname: 'Natikin', city: 'D-city', club: 'D Club', gender: 'm', events: [{id: 0, title: '21.1', place: 3, points: 90}], points: 90, place: 3},
-    {id: 4, avatar: 'd', name: 'Igor', lastname: 'Natikin', city: 'E-city', club: 'E Club', gender: 'm', events: [{id: 0, title: '21.1', place: 3, points: 90}], points: 90, place: 3},
-    {id: 5, avatar: 'd', name: 'Igor', lastname: 'Natikin', city: 'F-city', club: 'F Club', gender: 'm', events: [{id: 0, title: '21.1', place: 3, points: 90}], points: 90, place: 3},
-    {id: 6, avatar: 'd', name: 'Igor', lastname: 'Natikin', city: 'G-city', club: 'G Club', gender: 'm', events: [{id: 0, title: '21.1', place: 3, points: 90}], points: 90, place: 10},
-    {id: 7, avatar: 'd', name: 'Igor', lastname: 'Natikin', city: 'H-city', club: 'H Club', gender: 'm', events: [{id: 0, title: '21.1', place: 3, points: 90}], points: 90, place: 3},
-    {id: 8, avatar: 'd', name: 'Igor', lastname: 'Natikin', city: 'I-city', club: 'I Club', gender: 'm', events: [{id: 0, title: '21.1', place: 3, points: 90}], points: 90, place: 3},
-    {id: 9, avatar: 'd', name: 'Igor', lastname: 'Natikin', city: 'J-city', club: 'J Club', gender: 'm', events: [{id: 0, title: '21.1', place: 3, points: 90}], points: 90, place: 3},
-    {id: 10, avatar: 'd', name: 'Igor', lastname: 'Natikin', city: 'K-city', club: 'K Club', gender: 'm', events: [{id: 0, title: '21.1', place: 3, points: 90}], points: 90, place: 3},
-  ]
-
+  
   const tabsEvent = [
-    {id: 0, title: 'Result'},
+    {id: 0, title: 'Итог'},
     {id: 1, title: '21.1'},
     {id: 2, title: '21.2'},
     {id: 3, title: '21.3'},
@@ -49,11 +37,9 @@ function App() {
   ]
 
   const optionsGender = [
-    {id: 0, title: 'Mens'},
-    {id: 1, title: 'Womens'}
+    {id: 0, title: 'Парни'},
+    {id: 1, title: 'Девушки'}
   ]
-
-  const [data, setData] = useState(list)
 
   const s = {
     topSection: {
@@ -92,6 +78,7 @@ function App() {
 
   return (
     <Fragment>
+      <Blackout active={isLoading} disabled><p>Загрузка...</p></Blackout>
       <div style={s.topSection}>
         <div style={s.appBar}>
           <p style={s.header}>Roockie Challenge 2021</p>

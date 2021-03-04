@@ -32,7 +32,7 @@ const ListItem = ({item = {}, onClick}) => {
             backgroundColor: 'white',
             borderRadius: '7px',
             marginBottom: '10px',
-            padding: '5px 15px',
+            padding: '10px 15px',
             boxShadow: '1px 1px 10px rgba(0,0,0,0.05)'
         },
         place: {
@@ -79,7 +79,7 @@ const ListItem = ({item = {}, onClick}) => {
             <img style={s.avatar} alt='' src='https://w7.pngwing.com/pngs/72/42/png-transparent-vkontakte-social-networking-service-account-user-facebook-anonymous-mask-miscellaneous-blue-people.png'/>
             <div style={s.nameBlock}>
                 <p style={s.name}>{item.lastname} {item.name}</p>
-                <span style={s.subnameBlock}><p style={s.subnameCity}>{item.city}</p><p style={s.subnameClub}>, {item.club}</p></span>
+                <span style={s.subnameBlock}><p style={s.subnameCity}>{item.city}</p><p style={s.subnameClub}>, «{item.club}»</p></span>
             </div>
             <p style={s.points}>{item.points}</p>
         </div>
