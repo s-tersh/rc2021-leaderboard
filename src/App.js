@@ -10,28 +10,20 @@ function App() {
 
   const [isLoading, setLoading] = useState(true)
   const [data, setData] = useState([])
-
+  const [aList, setAList] = useState([])
 
   useEffect(() => {
-    getMAthletesList()
+    loadData()
   }, [])
   
   document.body.style.overflow = isLoading ? 'hidden' : 'auto'
 
-  function getMAthletesList() {
-    db.getMAthletes()
-      .then(athlete => {
-        setData(athlete)
-        setLoading(false)
-      })
-  }
-
-  function getWAthletesList() {
-    db.getWAthletes()
-      .then(athlete => {
-        setData(athlete)
-        setLoading(false)
-      })
+  async function loadData() {
+    const mList = await db.getMAthletes()
+    setData(mList)
+    const wList = await db.getWAthletes()
+    setAList([mList, wList])
+    setLoading(false)
   }
   
   const tabsEvent = [
@@ -73,13 +65,8 @@ function App() {
 
   function _onChangeGender(id) {
     setLoading(true)
-    switch(id) {
-      case 0: getMAthletesList()
-      break
-      case 1: getWAthletesList()
-      break
-      default: break
-    }
+    setData(aList[id])
+    setLoading(false)
   }
 
   function _onCangeEvent(id) {
@@ -92,7 +79,7 @@ function App() {
 
   return (
     <Fragment>
-      <Blackout active={isLoading} disabled><p>Загрузка...</p></Blackout>
+      <Blackout active={isLoading} disabled><p>Обновляем данные ...</p></Blackout>
       <div style={s.topSection}>
         <div style={s.appBar}>
           <p style={s.header}>Roockie Challenge 2021</p>

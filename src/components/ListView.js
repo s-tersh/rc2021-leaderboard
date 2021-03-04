@@ -41,6 +41,9 @@ const ListItem = ({item = {}, onClick}) => {
             fontWeight: '400',
             textAlign: 'center'
         },
+        avatarContainer: {
+            width: '50px',
+        },
         avatar: {
             width: '35px',
             height: '35px',
@@ -53,7 +56,7 @@ const ListItem = ({item = {}, onClick}) => {
         },
         name: {
             fontSize: '0.85rem',
-            fontWeight: '700',
+            fontWeight: '600',
             margin: '0'
         },
         subnameBlock: {
@@ -69,7 +72,7 @@ const ListItem = ({item = {}, onClick}) => {
         },
         points: {
             width: '50px',
-            fontWeight: '700',
+            fontWeight: '400',
             textAlign: 'center'
         }
     }
@@ -81,7 +84,9 @@ const ListItem = ({item = {}, onClick}) => {
     return (
         <div style={s.container} onClick={_onClick}>
             <p style={s.place}>{item.place || item.id}</p>
-            <img style={s.avatar} alt='' src='https://w7.pngwing.com/pngs/72/42/png-transparent-vkontakte-social-networking-service-account-user-facebook-anonymous-mask-miscellaneous-blue-people.png'/>
+            <div style={s.avatarContainer}>
+                <img style={s.avatar} alt='' src='https://w7.pngwing.com/pngs/72/42/png-transparent-vkontakte-social-networking-service-account-user-facebook-anonymous-mask-miscellaneous-blue-people.png'/>
+            </div>
             <div style={s.nameBlock}>
                 <p style={s.name}>{item.name}</p>
                 <span style={s.subnameBlock}>

@@ -17,8 +17,8 @@ const Tabs = ({tabs = [], initial = 0, onChange}) => {
             alignItems: 'center',
             marginRight: '30px',
             paddingRight: '20px',
-            fontSize: '1rem',
-            fontWeight: isActive ? '700' : '400',
+            fontSize: '0.85rem',
+            fontWeight: isActive ? '600' : '400',
             color: !isActive && '#a5a5a5'
         }),
         marker: {

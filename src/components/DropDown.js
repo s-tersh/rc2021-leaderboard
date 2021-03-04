@@ -25,7 +25,8 @@ const Dropdown = ({options = [], initial = 0, textAlign, onChange}) => {
         },
         option: (isActive) => ({
             margin: '15px 0',
-            fontWeight: isActive ? '700' : '400'
+            fontSize: '0.85rem',
+            fontWeight: isActive ? '600' : '400'
         })
     }
 
