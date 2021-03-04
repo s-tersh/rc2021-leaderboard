@@ -1,9 +1,6 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 
 const Blackout = ({active = false, onClose, children, disabled = false}) => {
-    
-    const [visible, setVisible] = useState(active)
-
     const s = {
         container : {
             display: 'flex',
@@ -21,13 +18,19 @@ const Blackout = ({active = false, onClose, children, disabled = false}) => {
     }
     
     const _onClick = () => {
-        !disabled && setVisible(false)
-        !disabled && onClose && onClose()
+        if(!disabled) {
+            hideModal()
+            onClose && onClose()
+        }
+    }
+
+    const hideModal = () => {
+        active = false
     }
 
     return (
         <Fragment>
-            {visible &&
+            {active &&
                 <div style={s.container} onClick={_onClick}>
                     {children}
                 </div>

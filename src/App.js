@@ -24,6 +24,14 @@ function App() {
       })
   }
 
+  function getWAthletesList() {
+    db.getWAthletes()
+      .then(athlete => {
+        setData(athlete)
+        setLoading(false)
+      })
+  }
+
   
   const tabsEvent = [
     {id: 0, title: 'Итог'},
@@ -65,7 +73,13 @@ function App() {
   }
 
   function _onChangeGender(id) {
-    console.log(`Gender is ${id}`)
+    setLoading(true)
+    switch(id) {
+      case 0: getMAthletesList()
+      break
+      case 1: getWAthletesList()
+      break
+    }
   }
 
   function _onCangeEvent(id) {
