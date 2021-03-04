@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Icon from './Icon'
 
-const Dropdown = ({options = [], textAlign, onChange}) => {
+const Dropdown = ({options = [], initial = 0, textAlign, onChange}) => {
 
-    const [active, setActive] = useState(options[0])
+    const [active, setActive] = useState(initial)
     const [focus, setFocus] = useState(false)
 
     const s = {
@@ -13,42 +13,41 @@ const Dropdown = ({options = [], textAlign, onChange}) => {
         optionsHolder: {
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'center'
+            justifyContent: 'center',
         },
         optionsContainer: {
             position: 'absolute',
             backgroundColor: 'white',
             padding: '5px 50px',
             margin: '10px auto 0 auto',
-            borderRadius: '7px'
+            borderRadius: '7px',
+            boxShadow: '1px 1px 10px rgba(0,0,0,0.05)'
         },
-        option: {
-            margin: '10px 0'
-        },
-        optionActive: {
-            margin: '10px 0',
-            fontWeight: '700'
-        }
+        option: (isActive) => ({
+            margin: '15px 0',
+            fontWeight: isActive ? '700' : '400'
+        })
     }
 
     function _onClickSelect() {
         setFocus(!focus)
     }
 
-    function _onClickOption(option) {
-        setActive(option)
+    function _onClickOption(index) {
+        setActive(index)
         setFocus(false)
-        onChange && onChange(option.id)
+        onChange && onChange(index)
     }
 
     return (
         <div style={s.container}>
-            <div onClick={_onClickSelect}>{active.title}<Icon name='caret-down' size={10}/></div>
+            <div onClick={_onClickSelect}>{options[active].title}<Icon name='caret-down' size={10}/></div>
             {focus &&
                 <div style={s.optionsHolder}>
                     <div style={s.optionsContainer}>
                         {options.map(option => {
-                            return <p key={option.id} style={active === option ? s.optionActive : s.option} onClick={() => {_onClickOption(option)}}>{option.title}</p>
+                            const index = options.indexOf(option)
+                            return <p key={option.id} style={s.option(active === index)} onClick={() => {_onClickOption(index)}}>{option.title}</p>
                         })}
                     </div>
                 </div>

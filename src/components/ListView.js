@@ -32,12 +32,14 @@ const ListItem = ({item = {}, onClick}) => {
             backgroundColor: 'white',
             borderRadius: '7px',
             marginBottom: '10px',
-            padding: '10px 15px',
+            padding: '10px 0',
             boxShadow: '1px 1px 10px rgba(0,0,0,0.05)'
         },
         place: {
-            width: '25px',
-            fontWeight: '700'
+            width: '40px',
+            fontSize: '0.75rem',
+            fontWeight: '400',
+            textAlign: 'center'
         },
         avatar: {
             width: '35px',
@@ -50,6 +52,7 @@ const ListItem = ({item = {}, onClick}) => {
             flexGrow: '1',
         },
         name: {
+            fontSize: '0.85rem',
             fontWeight: '700',
             margin: '0'
         },
@@ -65,7 +68,9 @@ const ListItem = ({item = {}, onClick}) => {
             margin: '0'
         },
         points: {
-            fontWeight: '700'
+            width: '50px',
+            fontWeight: '700',
+            textAlign: 'center'
         }
     }
 
@@ -75,13 +80,17 @@ const ListItem = ({item = {}, onClick}) => {
 
     return (
         <div style={s.container} onClick={_onClick}>
-            <p style={s.place}>{item.place}</p>
+            <p style={s.place}>{item.place || item.id}</p>
             <img style={s.avatar} alt='' src='https://w7.pngwing.com/pngs/72/42/png-transparent-vkontakte-social-networking-service-account-user-facebook-anonymous-mask-miscellaneous-blue-people.png'/>
             <div style={s.nameBlock}>
-                <p style={s.name}>{item.lastname} {item.name}</p>
-                <span style={s.subnameBlock}><p style={s.subnameCity}>{item.city}</p><p style={s.subnameClub}>, «{item.club}»</p></span>
+                <p style={s.name}>{item.name}</p>
+                <span style={s.subnameBlock}>
+                    {/* <p style={s.subnameCity}>{item.city}</p> */}
+                    {/* <p style={s.subnameClub}>, </p> */}
+                    <p style={s.subnameClub}>«{item.club}»</p>
+                </span>
             </div>
-            <p style={s.points}>{item.points}</p>
+            <p style={s.points}>{item.points || 0}</p>
         </div>
     )
 }

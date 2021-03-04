@@ -16,17 +16,14 @@ const Grid = ({columnsCount, children = []}) => {
         },
         columnContent: {
             textAlign: 'center',
-            backgroundColor: "#ffffff",
             margin: '0 5px'
         },
         firstColumnContent: {
             textAlign: 'center',
-            backgroundColor: "#ffffff",
             margin: '0 5px 0 0'
         },
         lastColumnContent: {
             textAlign: 'center',
-            backgroundColor: "#ffffff",
             margin: '0 0 0 5px'
         },
     }
@@ -37,18 +34,12 @@ const Grid = ({columnsCount, children = []}) => {
                 const index = children.indexOf(column)
                 const isFirst = index % columns === 0  
                 const isLast = index % columns === columns - 1  
-                return <div key={column.id} style={s.column}>
-                    <div style={isFirst ? s.firstColumnContent : isLast ? s.lastColumnContent : s.columnContent}>{index % columns}</div>
+                return <div key={`col-${index}`} style={s.column}>
+                    <div style={isFirst ? s.firstColumnContent : isLast ? s.lastColumnContent : s.columnContent}>{column}</div>
                 </div>
             })}
         </div>
     )
 }
-
-// const Column = () => {
-//     return (
-//         <div></div>
-//     )
-// }
 
 export default Grid

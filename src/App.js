@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from 'react'
 import ListView from './components/ListView.js'
 import './App.css'
 import Dropdown from './components/DropDown.js'
-import Grid from './components/Grid.js'
 import Tabs from './components/Tabs.js'
 import db from './db.js'
 import Blackout from './components/Blackout.js'
@@ -12,10 +11,13 @@ function App() {
   const [isLoading, setLoading] = useState(true)
   const [data, setData] = useState([])
 
+
   useEffect(() => {
     getMAthletesList()
   }, [])
   
+  document.body.style.overflow = isLoading ? 'hidden' : 'auto'
+
   function getMAthletesList() {
     db.getMAthletes()
       .then(athlete => {
@@ -31,17 +33,14 @@ function App() {
         setLoading(false)
       })
   }
-
   
   const tabsEvent = [
+    {id: 5, title: 'Атлеты'},
     {id: 0, title: 'Итог'},
     {id: 1, title: '21.1'},
     {id: 2, title: '21.2'},
     {id: 3, title: '21.3'},
-    {id: 4, title: '21.4'},
-    {id: 5, title: '21.5'},
-    {id: 6, title: '21.6'},
-    {id: 7, title: '21.7'}
+    {id: 4, title: '21.4'}
   ]
 
   const optionsGender = [
@@ -79,6 +78,7 @@ function App() {
       break
       case 1: getWAthletesList()
       break
+      default: break
     }
   }
 
@@ -100,11 +100,6 @@ function App() {
         </div>
       </div>
       <div style={s.bottomSection}>
-        <Grid style={s.lb} columnsCount={3} children={[
-          {id: 0},
-          {id: 1},
-          {id: 2}
-        ]}/>
         <Tabs tabs={tabsEvent} selected={tabsEvent[0]} onChange={_onCangeEvent}/>
         <ListView item items={data} onClickItem={_onClickAthlete}/>
       </div>

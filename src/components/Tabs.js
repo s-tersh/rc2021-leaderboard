@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-const Tabs = ({tabs = [], selected, onChange}) => {
+const Tabs = ({tabs = [], initial = 0, onChange}) => {
 
-    const [active, setActive] = useState(selected === undefined ? tabs[0] : selected )
+    const [active, setActive] = useState(initial)
 
     const s = {
         container: {
@@ -12,20 +12,15 @@ const Tabs = ({tabs = [], selected, onChange}) => {
             paddingLeft: '20px',
             paddingBottom: '10px'
         },
-        tab: {
-            marginRight: '30px',
-            paddingRight: '20px',
-            fontSize: '1rem',
-            color: '#a5a5a5'
-        },
-        tabActive: {
+        tab: (isActive) => ({
             display: 'flex',
             alignItems: 'center',
             marginRight: '30px',
             paddingRight: '20px',
-            fontWeight: '700',
-            fontSize: '1rem'
-        },
+            fontSize: '1rem',
+            fontWeight: isActive ? '700' : '400',
+            color: !isActive && '#a5a5a5'
+        }),
         marker: {
             display: 'block',
             width: '5px',
@@ -36,15 +31,16 @@ const Tabs = ({tabs = [], selected, onChange}) => {
         }
     }
 
-    function _onClickTab(tab) {
-        setActive(tab)
-        onChange && onChange(tab.id)
+    function _onClickTab(index) {
+        setActive(index)
+        onChange && onChange(index)
     }
 
     return (
         <div style={s.container}>
             {tabs.map(tab => {
-                return <p key={tab.id} style={active === tab ? s.tabActive : s.tab} onClick={() => {_onClickTab(tab)}}>{active === tab && <li style={s.marker}/>}{tab.title}</p>
+                const index = tabs.indexOf(tab)
+                return <p key={tab.id} style={s.tab(active === index)} onClick={() => {_onClickTab(index)}}>{active === index && <li style={s.marker}/>}{tab.title}</p>
             })}
         </div>
     )
