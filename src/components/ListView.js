@@ -24,30 +24,35 @@ const ListView = ({items = [], onClickItem}) => {
 const ListItem = ({item = {}, onClick}) => {
 
     const s = {
-        container: {
+        container: (place) => ({
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            backgroundColor: 'white',
+            backgroundColor: place === '1' ? 'rgba(255, 215, 0, 0.25)' : place === '2' ? 'rgba(192, 192, 192, 0.45)' : place === '3' ? 'rgba(205, 125, 50, 0.25)' : '#ffffff',
             borderRadius: '7px',
-            marginBottom: '10px',
-            padding: '10px 0',
+            marginBottom: '7px',
+            padding: '5px 0',
             boxShadow: '1px 1px 10px rgba(0,0,0,0.05)'
-        },
+        }),
         place: {
-            width: '40px',
+            width: '36px',
+            margin: '0',
             fontSize: '0.75rem',
             fontWeight: '400',
             textAlign: 'center'
         },
         avatarContainer: {
-            width: '50px',
+            width: '45px',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center'
         },
         avatar: {
             width: '35px',
             height: '35px',
-            borderRadius: '35px',
+            borderRadius: '7px',
             backgroundColor: 'blue',
             marginRight: '15px'
         },
@@ -59,11 +64,11 @@ const ListItem = ({item = {}, onClick}) => {
             fontWeight: '600',
             margin: '0'
         },
-        subnameBlock: {
+        subnameBlock: (place) => ({
             display: 'flex',
             fontSize: '.65rem',
-            color: '#b1b1b1'
-        },
+            color: place === '1' || place === '2' || place === '3' ? '#323232' : '#b1b1b1'
+        }),
         subnameCity: {
             margin: '0'
         },
@@ -71,7 +76,8 @@ const ListItem = ({item = {}, onClick}) => {
             margin: '0'
         },
         points: {
-            width: '50px',
+            width: '36px',
+            margin: '0',
             fontWeight: '400',
             textAlign: 'center'
         }
@@ -82,14 +88,14 @@ const ListItem = ({item = {}, onClick}) => {
     }
 
     return (
-        <div style={s.container} onClick={_onClick}>
+        <div style={s.container(item.place || item.id)} onClick={_onClick}>
             <p style={s.place}>{item.place || item.id}</p>
             <div style={s.avatarContainer}>
                 <img style={s.avatar} alt='' src='https://w7.pngwing.com/pngs/72/42/png-transparent-vkontakte-social-networking-service-account-user-facebook-anonymous-mask-miscellaneous-blue-people.png'/>
             </div>
             <div style={s.nameBlock}>
                 <p style={s.name}>{item.name}</p>
-                <span style={s.subnameBlock}>
+                <span style={s.subnameBlock(item.place || item.id)}>
                     {/* <p style={s.subnameCity}>{item.city}</p> */}
                     {/* <p style={s.subnameClub}>, </p> */}
                     <p style={s.subnameClub}>«{item.club}»</p>

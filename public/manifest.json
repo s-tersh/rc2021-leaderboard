@@ -1,0 +1,10 @@
+{
+    "name": "Roockie Challenge 21",
+    "short_name": "RC 21",
+    "theme_color": "#2196f3",
+    "background_color": "#2196f3",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/"
+  }

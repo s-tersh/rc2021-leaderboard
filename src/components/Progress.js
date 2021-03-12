@@ -1,8 +1,6 @@
 import React from 'react'
 
 const Bar = ({value = 80, maxValue = 100, color, style}) => {
-
-
     const s = {
         container: {
             width: '100%',

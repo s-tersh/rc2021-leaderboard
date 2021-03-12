@@ -9,18 +9,21 @@ function Athlete(id, name, city, club, gender, points, events, avatar) {
     this.gender = gender
 }
 
+const doc = new GoogleSpreadsheet(credentinals.sheet_id)
+
 const initConnection = async() => {
-    const doc = new GoogleSpreadsheet(credentinals.sheet_id)
-    await doc.useServiceAccountAuth({
-        client_email: credentinals.client_email,
-        private_key: credentinals.private_key,
-    })
-    await doc.loadInfo()
-    return doc
+    try {
+        await doc.useServiceAccountAuth({
+            client_email: credentinals.client_email,
+            private_key: credentinals.private_key,
+        })
+    } catch (e) {
+        console.error('Error: ', e)
+    }
 }
 
 const getSheet = async(name) => {
-    const doc = await initConnection()
+    await doc.loadInfo()
     return doc.sheetsByTitle[name]
 }
 
@@ -42,6 +45,7 @@ const getMAthletes = async() => {
 }
 
 const db = {
+    initConnection,
     getWAthletes,
     getMAthletes
 }

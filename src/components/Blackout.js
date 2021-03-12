@@ -17,6 +17,8 @@ const Blackout = ({active = false, onClose, children, disabled = false}) => {
         }
     }
     
+    document.body.style.overflow = active ? 'hidden' : 'auto'
+
     const _onClick = () => {
         if(!disabled) {
             hideModal()
