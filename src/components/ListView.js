@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ListView = ({items = [], onClickItem}) => {
+const ListView = ({items = [], loading, onClickItem}) => {
 
     const s = {
         container: {
@@ -91,13 +91,11 @@ const ListItem = ({item = {}, onClick}) => {
         <div style={s.container(item.place || item.id)} onClick={_onClick}>
             <p style={s.place}>{item.place || item.id}</p>
             <div style={s.avatarContainer}>
-                <img style={s.avatar} alt='' src='https://w7.pngwing.com/pngs/72/42/png-transparent-vkontakte-social-networking-service-account-user-facebook-anonymous-mask-miscellaneous-blue-people.png'/>
+                <img style={s.avatar} alt='' src={process.env.PUBLIC_URL + '/icons/empty-avatar.png'} />
             </div>
             <div style={s.nameBlock}>
                 <p style={s.name}>{item.name}</p>
                 <span style={s.subnameBlock(item.place || item.id)}>
-                    {/* <p style={s.subnameCity}>{item.city}</p> */}
-                    {/* <p style={s.subnameClub}>, </p> */}
                     <p style={s.subnameClub}>«{item.club}»</p>
                 </span>
             </div>

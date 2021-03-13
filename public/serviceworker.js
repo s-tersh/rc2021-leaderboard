@@ -1,24 +1,30 @@
-const CACHE = 'cache-only-v1';
+const CACHE = 'cache-v1';
 
-// При установке воркера мы должны закешировать часть данных (статику).
 self.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(CACHE).then((cache) => {
-            return cache.addAll([
-                '/img/background'
-            ]);
-        })
-    );
+        caches.open(CACHE).then((cache) => cache.addAll(['./icons/', './static/'])));
 });
 
-// При запросе на сервер (событие fetch), используем только данные из кэша.
-self.addEventListener('fetch', (event) =>
-    event.respondWith(fromCache(event.request))
-);
+self.addEventListener('activate', (event) => {
+    console.log('Активирован');
+});
+
+self.addEventListener('fetch', (event) => {
+    event.respondWith(fromCache(event.request));
+    event.waitUntil(update(event.request));
+});
 
 function fromCache(request) {
     return caches.open(CACHE).then((cache) =>
-      cache.match(request)
-          .then((matching) => matching || Promise.reject('no-match'))
+        cache.match(request).then((matching) =>
+            matching || Promise.reject('no-match')
+        ));
+}
+
+function update(request) {
+    return caches.open(CACHE).then((cache) =>
+        fetch(request).then((response) =>
+            cache.put(request, response)
+        )
     );
 }
