@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ListView = ({items = [], loading, onClickItem}) => {
+const ListView = ({items = [], onClickItem}) => {
 
     const s = {
         container: {
@@ -15,7 +15,7 @@ const ListView = ({items = [], loading, onClickItem}) => {
     return (
         <div style={s.container}>
             {items.map(item => {
-                return <ListItem key={item.id} item={item} onClick={() => {_onClickItem(item.id)}}/>
+                return <ListItem key={item.id} item={item.cells} onClick={() => {_onClickItem(item.id)}}/>
             })}
         </div>
     )
@@ -88,15 +88,15 @@ const ListItem = ({item = {}, onClick}) => {
     }
 
     return (
-        <div style={s.container(item.place || item.id)} onClick={_onClick}>
+        <div style={s.container(item[0].value || item.id)} onClick={_onClick}>
             <p style={s.place}>{item.place || item.id}</p>
             <div style={s.avatarContainer}>
-                <img style={s.avatar} alt='' src={process.env.PUBLIC_URL + '/icons/empty-avatar.png'} />
+                <img style={s.avatar} alt='' src={process.env.PUBLIC_URL + '/images/empty-avatar.png'} />
             </div>
             <div style={s.nameBlock}>
-                <p style={s.name}>{item.name}</p>
+                <p style={s.name}>{item[1].value}</p>
                 <span style={s.subnameBlock(item.place || item.id)}>
-                    <p style={s.subnameClub}>«{item.club}»</p>
+                    <p style={s.subnameClub}>«{item[3].value}»</p>
                 </span>
             </div>
             <p style={s.points}>{item.points || 0}</p>

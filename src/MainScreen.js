@@ -1,29 +1,30 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import ListView from './components/ListView.js'
 import Dropdown from './components/DropDown.js'
 import Tabs from './components/Tabs.js'
 import Blackout from './components/Blackout.js'
+import GSheet from './GSheet'
 import './App.css'
 
-const MainScreen = ({aList = []}) => {
+const MainScreen = () => {
 
   const [isLoading, setLoading] = useState(false)
-  const [data, setData] = useState(aList[0])
-
+  const [data, setData] = useState([])
+  
   const tabsEvent = [
-    {id: 5, title: 'Атлеты'},
-    {id: 0, title: 'Итог'},
-    {id: 1, title: '21.1'},
-    {id: 2, title: '21.2'},
-    {id: 3, title: '21.3'},
-    {id: 4, title: '21.4'}
+    {id: 'A', title: 'Атлеты'},
+    {id: 'Result', title: 'Итог'},
+    {id: '21.1', title: '21.1'},
+    {id: '21.2', title: '21.2'},
+    {id: '21.3', title: '21.3'},
+    {id: '21.4', title: '21.4'}
   ]
-
+  
   const optionsGender = [
-    {id: 0, title: 'Парни'},
-    {id: 1, title: 'Девушки'}
+    {id: 'M', title: 'Парни'},
+    {id: 'W', title: 'Девушки'}
   ]
-
+  
   const s = {
     topSection: {
       height: '67px'
@@ -47,19 +48,27 @@ const MainScreen = ({aList = []}) => {
     }
   }
 
-  function _onChangeGender(id) {
-    setLoading(true)
-    setData(aList[id])
-    setLoading(false)
+  async function getActiveData(genderID, evID) {
+    const sheets = new GSheet('2PACX-1vSy6xfq8E1xlnkIBLB3T3WwkUsyKdfaBmNYfvpBxsZ1dImDUQHLiMrBAFHN8KxhGZEElhVbGArSFeLX')
+    await sheets.getTable(`MA`).then(data => setData(data))
   }
 
-  function _onCangeEvent(id) {
-    console.log(`Tab is ${id}`)
+  async function _onChangeGender(id) {
+    const sheets = new GSheet('2PACX-1vSy6xfq8E1xlnkIBLB3T3WwkUsyKdfaBmNYfvpBxsZ1dImDUQHLiMrBAFHN8KxhGZEElhVbGArSFeLX')
+    await sheets.getTable(`${optionsGender[id].id}A`).then(data => setData(data))
+  }
+
+  async function _onCangeEvent(id) {
+    
   }
 
   function _onClickAthlete(id) {
-    console.log(`Item is ${id}`)
+    
   }
+
+  useEffect(() => {
+    getActiveData()
+  }, [])
 
   return (
     <Fragment>
@@ -72,7 +81,7 @@ const MainScreen = ({aList = []}) => {
       </div>
       <div style={s.bottomSection}>
         <Tabs tabs={tabsEvent} selected={tabsEvent[0]} onChange={_onCangeEvent}/>
-        <ListView item items={data} onClickItem={_onClickAthlete}/>
+        <ListView item items={data.rows} onClickItem={_onClickAthlete}/>
       </div>
     </Fragment>
   )

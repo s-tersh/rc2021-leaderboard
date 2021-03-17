@@ -27,6 +27,13 @@ const getSheet = async(name) => {
     return doc.sheetsByTitle[name]
 }
 
+const getRes = async(gender, eventNum) => {
+    const sheet = await getSheet(`${gender}${eventNum}`)
+    const rows = await sheet.getRows()
+    const athletes = rows.filter(row => rows.indexOf(row) !== 1)
+    return athletes
+}
+
 const getAthletes = async(gender) => {
     const sheet = await getSheet(gender)
     const rows = await sheet.getRows()
@@ -47,7 +54,8 @@ const getMAthletes = async() => {
 const db = {
     initConnection,
     getWAthletes,
-    getMAthletes
+    getMAthletes,
+    getRes
 }
 
 export default db

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SplashScreen = ({logo, title = 'React App'}) => {
+const SplashScreen = ({logo, title}) => {
 
     const s = {
         container: {
@@ -15,15 +15,17 @@ const SplashScreen = ({logo, title = 'React App'}) => {
         title: {
             fontWeight: '600',
             fontSize: '1rem'
+        },
+        logo: {
+            width: 96,
+            height: 96
         }
     }
 
     return (
         <div style={s.container}>
-            <div>
-                {logo && <img src={logo} alt=''/>}
-                <p style={s.title}>{title}</p>
-            </div>
+            {logo && <img src={logo} alt='' style={s.logo} />}
+            {title && <p style={s.title}>{title}</p>}
         </div>
     )
 }
