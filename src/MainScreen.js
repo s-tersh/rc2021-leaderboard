@@ -10,6 +10,7 @@ const MainScreen = () => {
 
   const [isLoading, setLoading] = useState(false)
   const [data, setData] = useState([])
+  const [active, setActive] = useState({gender: 'M', ev: 'A'})
   
   const tabsEvent = [
     {id: 'A', title: 'Атлеты'},
@@ -48,18 +49,24 @@ const MainScreen = () => {
     }
   }
 
-  async function getActiveData(genderID, evID) {
+  async function getActiveData(gender, ev) {
+    setLoading(true)
+    const tableName = `${gender}${ev}`
     const sheets = new GSheet('2PACX-1vSy6xfq8E1xlnkIBLB3T3WwkUsyKdfaBmNYfvpBxsZ1dImDUQHLiMrBAFHN8KxhGZEElhVbGArSFeLX')
-    await sheets.getTable(`MA`).then(data => setData(data))
+    await sheets.getTable(tableName).then(data => {
+      setData(data)
+      setLoading(false)
+    })
   }
 
   async function _onChangeGender(id) {
-    const sheets = new GSheet('2PACX-1vSy6xfq8E1xlnkIBLB3T3WwkUsyKdfaBmNYfvpBxsZ1dImDUQHLiMrBAFHN8KxhGZEElhVbGArSFeLX')
-    await sheets.getTable(`${optionsGender[id].id}A`).then(data => setData(data))
+    setActive({gender: optionsGender[id].id, ev: active.ev})
+    getActiveData(optionsGender[id].id, active.ev)
   }
 
   async function _onCangeEvent(id) {
-    
+    setActive({gender: active.gender, ev: tabsEvent[id].id})
+    getActiveData(active.gender, tabsEvent[id].id)
   }
 
   function _onClickAthlete(id) {
@@ -67,7 +74,7 @@ const MainScreen = () => {
   }
 
   useEffect(() => {
-    getActiveData()
+    getActiveData(active.gender, active.ev)
   }, [])
 
   return (
@@ -81,7 +88,11 @@ const MainScreen = () => {
       </div>
       <div style={s.bottomSection}>
         <Tabs tabs={tabsEvent} selected={tabsEvent[0]} onChange={_onCangeEvent}/>
-        <ListView item items={data.rows} onClickItem={_onClickAthlete}/>
+        {data ? 
+          <ListView item items={data.rows} onClickItem={_onClickAthlete}/>
+          :
+          <p>Sorry, but this table is empty</p>
+        }
       </div>
     </Fragment>
   )
