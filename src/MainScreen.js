@@ -5,6 +5,7 @@ import Tabs from './components/Tabs.js'
 import Blackout from './components/Blackout.js'
 import GSheet from './GSheet'
 import './App.css'
+import Empty from './components/Empty.component'
 
 const MainScreen = () => {
 
@@ -27,11 +28,16 @@ const MainScreen = () => {
   ]
   
   const s = {
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100vh'
+    },
     topSection: {
-      height: '67px'
+      height: '117px'
     },
     appBar: {
-      position: 'fixed',
+      // position: 'fixed',
       left: '0',
       right: '0',
       backgroundColor: '#fbfbfb',
@@ -45,7 +51,9 @@ const MainScreen = () => {
       color: 'grey'
     },
     bottomSection: {
-      height: '70vh - 67px',
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
     }
   }
 
@@ -74,27 +82,28 @@ const MainScreen = () => {
   }
 
   useEffect(() => {
-    getActiveData(active.gender, active.ev)
+    const initPage = {gender: 'M', ev: 'A'}
+    getActiveData(initPage.gender, initPage.ev)
   }, [])
 
   return (
-    <Fragment>
+    <div style={s.container}>
       <Blackout active={isLoading} disabled><p>Обновляем данные ...</p></Blackout>
       <div style={s.topSection}>
         <div style={s.appBar}>
           <p style={s.header}>Roockie Challenge 2021</p>
           <Dropdown options={optionsGender} textAlign='center' onChange={_onChangeGender}/>
         </div>
+        <Tabs tabs={tabsEvent} selected={tabsEvent[0]} onChange={_onCangeEvent}/>
       </div>
       <div style={s.bottomSection}>
-        <Tabs tabs={tabsEvent} selected={tabsEvent[0]} onChange={_onCangeEvent}/>
-        {data ? 
+        {data ?
           <ListView item items={data.rows} onClickItem={_onClickAthlete}/>
           :
-          <p>Sorry, but this table is empty</p>
+          <Empty text='Данных пока нет' />
         }
       </div>
-    </Fragment>
+    </div>
   )
 }
 

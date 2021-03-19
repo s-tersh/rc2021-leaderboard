@@ -1,4 +1,5 @@
 import React from 'react'
+import Empty from './Empty.component'
 
 const ListView = ({items = [], onClickItem}) => {
 
@@ -13,11 +14,17 @@ const ListView = ({items = [], onClickItem}) => {
     }
 
     return (
-        <div style={s.container}>
-            {items.map(item => {
-                return <ListItem key={item.id} item={item.cells} onClick={() => {_onClickItem(item.id)}}/>
-            })}
-        </div>
+        <>
+        {items.length > 0 ?
+            <div style={s.container}>
+                    {items.map(item => {
+                        return <ListItem key={item.id} item={item.cells} onClick={() => {_onClickItem(item.id)}}/>
+                    })}
+            </div>
+            :
+            <Empty />
+        }
+        </>
     )
 }
 
