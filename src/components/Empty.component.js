@@ -11,13 +11,18 @@ const Empty = ({icon, text}) => {
             justifyContent: 'center',
         },
         content: {
+            alignItems: 'center',
             color: '#000000',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
         }
     }
 
     return (
         <div style={s.container}>
             <div style={s.content}>
+                {icon}
                 <p style={s.text}>
                     {text || 'Empty...'}
                 </p>
