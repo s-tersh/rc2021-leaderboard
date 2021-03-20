@@ -22,7 +22,7 @@ const ListView = ({items = [], onClickItem}) => {
                     })}
             </div>
             :
-            <Empty text='Пока никто не стартовал' icon={<img src={process.env.PUBLIC_URL + '/images/timer.png'} style={{display: 'block', width: '50px'}} />} />
+            <Empty text='Пока никто не стартовал' icon={<img alt='' src={process.env.PUBLIC_URL + '/images/timer.png'} style={{display: 'block', width: '50px'}} />} />
         }
         </>
     )

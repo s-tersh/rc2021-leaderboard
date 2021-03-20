@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Icon from './Icon'
+import Icon from './Icon.component'
 
 const Dropdown = ({options = [], initial = 0, textAlign, onChange}) => {
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import SplashScreen from './components/SplashScreen'
+import SplashScreen from './components/SplashScreen.component'
 import MainScreen from './MainScreen'
 
 function App() {
