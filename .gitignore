@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /src/credentinals.js
+/src/db.js
 /src/oauth2credentinals.js
 /.pnp
 .pnp.js
