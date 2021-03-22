@@ -10,6 +10,7 @@ const Dropdown = ({options = [], initial = 0, onChange}) => {
         container: {
             display: 'flex',
             justifyContent: 'center',
+            position: 'relative',
         },
         containerActive: {
             color: '#2c2c2c',
@@ -17,22 +18,21 @@ const Dropdown = ({options = [], initial = 0, onChange}) => {
             fontWeight: 600,
         },
         optionsHolder: {
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
+            marginTop: '10px',
+            position: 'absolute',
+            top: '100%',
         },
         optionsContainer: {
-            position: 'absolute',
             backgroundColor: 'white',
-            padding: '5px 50px',
-            margin: '10px auto 0 auto',
             borderRadius: '7px',
-            boxShadow: '1px 1px 10px rgba(0,0,0,0.05)'
+            boxShadow: '1px 1px 10px rgba(0,0,0,0.05)',
+            padding: '5px 30px',
         },
         option: (isActive) => ({
             margin: '15px 0',
             fontSize: '0.85rem',
-            fontWeight: isActive ? '600' : '400'
+            fontWeight: isActive ? '600' : '400',
+            textAlign: 'center'
         })
     }
 

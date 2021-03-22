@@ -1,33 +1,39 @@
 import React, { useEffect, useState } from 'react'
+import Blackout from './components/Blackout.component'
 import Dropdown from './components/DropDown.component'
+import Empty from './components/Empty.component'
 import GSheet from './GSheet'
 import './App.css'
 
 const MainScreen = () => {
 
+  const [isLoading, setLoading] = useState(false)
   const [data, setData] = useState([])
 
   const s = {
     container: {
       display: 'flex',
       flexDirection: 'column',
+      height: '100vh',
     },
     topSection: {
       backgroundColor: '#ffffff',
       boxShadow: '0px 4px 14px rgba(0,0,0,0.05)',
-      height: 90
+      height: 90,
+      minHeight: 90,
     },
     appTitle: {
       color: 'rgba(217,189,65,1)',
       fontSize: 14,
       fontWeight: 600,
+      marginBottom: 28,
+      marginTop: 17,
       textAlign: 'center',
       width: '100%',
     },
     bottomSection: {
       backgroundColor: '#f9f9f9',
-      marginLeft: 20,
-      marginRight: 20
+      flexGrow: 1,
     },
   }
 
@@ -38,9 +44,11 @@ const MainScreen = () => {
   }, [])
 
   async function getData(tableName) {
+    setLoading(true)
     const sheets = new GSheet('2PACX-1vSy6xfq8E1xlnkIBLB3T3WwkUsyKdfaBmNYfvpBxsZ1dImDUQHLiMrBAFHN8KxhGZEElhVbGArSFeLX')
     sheets.getTable(tableName, 2).then(res => {
       setData(res.rows)
+      setLoading(false)
     })
   }
 
@@ -50,12 +58,17 @@ const MainScreen = () => {
 
   return (
     <div style={s.container}>
+      <Blackout active={isLoading}><p style={{fontSize: 12, fontWeight: 600}}>Обновляем данные</p></Blackout>
       <div style={s.topSection}>
         <p style={s.appTitle}>ROOCKIE CHALLENGE 21</p>
         <Dropdown options={['Парни', 'Девушки']} onChange={_onChangeGender} />
       </div>
       <div style={s.bottomSection}>
-        <AthleteList data={data} />
+        {data.length > 0 ?
+          <AthleteList data={data} />
+          :
+          <Empty icon={process.env.PUBLIC_URL + '/images/empty-box.png'} text='Пока нет записей' />
+        }
       </div>
     </div>
 
@@ -66,6 +79,8 @@ const AthleteList = ({data}) => {
 
   const s = {
     listView: {
+      paddingLeft: 20,
+      paddingRight: 20,
       paddingTop: 20,
     },
   }

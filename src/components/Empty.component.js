@@ -15,15 +15,20 @@ const Empty = ({icon, text}) => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
+        },
+        text: {
+            color: '#cccccc',
+            fontSize: 12,
+            fontWeight: 600,
         }
     }
 
     return (
         <div style={s.container}>
             <div style={s.content}>
-                {icon}
+                <img alt='' src={icon}/>
                 <p style={s.text}>
-                    {text || 'Empty...'}
+                    {text || 'Empty'}
                 </p>
             </div>
         </div>
