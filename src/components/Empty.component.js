@@ -5,7 +5,6 @@ const Empty = ({icon, text}) => {
     const s = {
         container: {
             alignItems: 'center',
-            backgroundColor: '#efefef',
             display: 'flex',
             height: '100%',
             justifyContent: 'center',

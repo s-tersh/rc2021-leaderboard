@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
 import Icon from './Icon.component'
 
-const Dropdown = ({options = [], initial = 0, textAlign, onChange}) => {
+const Dropdown = ({options = [], initial = 0, onChange}) => {
 
     const [active, setActive] = useState(initial)
     const [focus, setFocus] = useState(false)
 
     const s = {
         container: {
-            textAlign: textAlign
+            display: 'flex',
+            justifyContent: 'center',
+        },
+        containerActive: {
+            color: '#2c2c2c',
+            fontSize: 14,
+            fontWeight: 600,
         },
         optionsHolder: {
             display: 'flex',
@@ -42,13 +48,13 @@ const Dropdown = ({options = [], initial = 0, textAlign, onChange}) => {
 
     return (
         <div style={s.container}>
-            <div onClick={_onClickSelect}>{options[active].title}<Icon name='caret-down' size={10}/></div>
+            <div onClick={_onClickSelect} style={s.containerActive}>{options[active]}<Icon name='caret-down' size={10}/></div>
             {focus &&
                 <div style={s.optionsHolder}>
                     <div style={s.optionsContainer}>
                         {options.map(option => {
                             const index = options.indexOf(option)
-                            return <p key={option.id} style={s.option(active === index)} onClick={() => {_onClickOption(index)}}>{option.title}</p>
+                            return <p key={index} style={s.option(active === index)} onClick={() => {_onClickOption(index)}}>{option}</p>
                         })}
                     </div>
                 </div>
