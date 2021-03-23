@@ -155,7 +155,7 @@ const AthleteItem = ({avatar, club, e1, e2, e3, e4, name, place, points}) => {
     },
     listItemTextBlockClub: {
       color: '#2f2f2f',
-      fontSize: 8,
+      fontSize: 10,
       margin: 0,
     },
     listItemPoints: {
@@ -177,7 +177,7 @@ const AthleteItem = ({avatar, club, e1, e2, e3, e4, name, place, points}) => {
     },
     listItemDetailBlockItem: {
       color: 'rgba(113,113,113,1)',
-      fontSize: 8,
+      fontSize: 10,
       fontWeight: 600,
       marginTop: 0,
       marginBottom: 5,
