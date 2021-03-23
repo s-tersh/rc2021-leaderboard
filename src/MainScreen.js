@@ -112,16 +112,14 @@ const AthleteList = ({data}) => {
 const AthleteItem = ({avatar, club, e1, e2, e3, e4, name, place, points}) => {
 
   const [isActive, setActive] = useState(false)
-  const border = place <=  3 ? 1 : 0
   const color = place === '1' ? 'rgba(255,215,0,1)' : place === '2' ? 'rgba(192,192,192,1)' : place === '3' ? 'rgba(205,125,50,1)' : '#2c2c2c'
+  const border = place ===  '1' || place === '2' || place === '3' ? `1px solid ${color}`  : 0
 
   const s = {
     listItem: (isActive) => ({
       backgroundColor: '#ffffff',
-      borderColor: color,
       borderRadius: 10,
-      borderStyle: 'solid',
-      borderWidth: border,
+      border: border,
       boxShadow: '0px 2px 4px rgba(0,0,0,0.05)',
       height: isActive ? 136 : 50,
       marginBottom: 10
