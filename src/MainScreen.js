@@ -60,7 +60,7 @@ const MainScreen = () => {
     <div style={s.container}>
       <Blackout active={isLoading}><p style={{fontSize: 12, fontWeight: 600}}>Обновляем данные</p></Blackout>
       <div style={s.topSection}>
-        <p style={s.appTitle}>ROOCKIE CHALLENGE 21</p>
+        <p style={s.appTitle}>ROOKIE CHALLENGE 21</p>
         <Dropdown options={['Парни', 'Девушки']} onChange={_onChangeGender} />
       </div>
       <div style={s.bottomSection}>
@@ -204,16 +204,16 @@ const AthleteItem = ({avatar, club, e1, e2, e3, e4, name, place, points}) => {
           <hr color='#efefef' style={s.divider} />
           <div style={s.listItemDetailBlock}>
             {e1 &&
-              <p style={s.listItemDetailBlockItem}>21.1 - {e1.place} место / {e1.points} баллов</p>
+              <p style={s.listItemDetailBlockItem}>21.1 - {e1.place ? `${e1.place} место` : 'Нет результата'} / {e1.points} баллов</p>
             }
             {e2 &&
-              <p style={s.listItemDetailBlockItem}>21.2 - {e2.place} место / {e2.points} баллов</p>
+              <p style={s.listItemDetailBlockItem}>21.2 - {e2.place ? `${e2.place} место` : 'Нет результата'} / {e2.points} баллов</p>
             }
             {e3 &&
-              <p style={s.listItemDetailBlockItem}>21.3 - {e3.place} место / {e3.points} баллов</p>
+              <p style={s.listItemDetailBlockItem}>21.3 - {e3.place ? `${e3.place} место` : 'Нет результата'} / {e3.points} баллов</p>
             }
             {e4 &&
-              <p style={s.listItemDetailBlockItem}>21.4 - {e4.place} место / {e4.points} баллов</p>
+              <p style={s.listItemDetailBlockItem}>21.4 - {e4.place ? `${e4.place} место` : 'Нет результата'} / {e4.points} баллов</p>
             }
           </div>
         </>
