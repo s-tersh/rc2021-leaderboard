@@ -71,7 +71,6 @@ const MainScreen = () => {
         }
       </div>
     </div>
-
   )
 }
 
